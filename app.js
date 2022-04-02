@@ -34,6 +34,9 @@ function initMap(){
             close_information.addEventListener("click", () => {
                 information_container.classList.remove('Show');
             })
+            modal_container.addEventListener("click", () =>{
+                information_container.classList.remove('Show');
+            })
         })
     }
 
