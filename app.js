@@ -1,6 +1,7 @@
 const modal_container = document.getElementById('information_container')
 const close_information = document.getElementById('close_information')
-
+const input_container = document.getElementById('input_container')
+const close_input = document.getElementById("close_input")
 function initMap(){
     
     // map option
@@ -19,14 +20,17 @@ function initMap(){
     });
     */
 
-    function addMarker(property){
+    async function addMarker(property){
         const marker = new google.maps.Marker({
             position: property.location,
             map:map
         })
-
-        const detailWindow = new google.maps.InfoWindow({
-            content: property.content
+        input_container.classList.add('Show');
+        close_input.addEventListener("click", () => {
+            input_container.classList.remove('Show');
+        })
+        input_container.addEventListener("click", () => {
+            input_container.classList.remove('Show');
         })
 
         marker.addListener("click", () => {
@@ -39,12 +43,6 @@ function initMap(){
             })
         })
     }
-
-    addMarker({
-        location:{lat:49.2716, lng:-123.0947},
-        content: "<h2>A picture I took near Burrard station</h2>"
-    })
-    addMarker({location:{lat:49.2856, lng:-123.1202}})
 
     google.maps.event.addListener(map, "click", (event) => {
         addMarker({location:event.latLng});
